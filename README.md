@@ -31,8 +31,12 @@ header route:
 body call: 
 POST {email: <user email>, password: <password>}
 
-### Create person
-This endpoint creates a new person in the database. It store firstname, Lastname and receives a list with the ids of the movies in casting, director and roles
+### Create\Edit person (Authentication Required)
+This endpoint creates a new person in the database. It store firstname, Lastname and receives a list with the ids of the movies in casting, director and roles. If the id corresponds to an existing id in the collection the service will update the values on the ID.
+
+The reference to the movies in the casting, director, and producer are updated automatically in the movies references.
+
+This method require an Authentication header that include the token retrieved from the login endpoint.
 
 header route:
 @app.route('/create', methods=['POST'])
@@ -41,15 +45,31 @@ body call
 POST {firstName: <person firstname>, lastName: <person lastname>, casting:"[1,2,3]", director:"[1,3]", producer="[1]"}
 Note that casting, director, and producer are string representation of lists that contain the id of the movies separated by comma (no space). 
 
+This method require an Authentication header that include the token retrieved from the login endpoint.
 
+### Create\Edit Movies (Authentication Required)
+This method allows to create\edit movies in the database. The reference to the person that takes a role as casting, director, and producer are updated automatically in the people references.
+
+header route:
 @app.route('/create_movies', methods=['POST'])
 
+body call
+POST {title:string <movie title>, relyear:number <release year>, casting:"[1,2,3]", director:"[1,3]", producer="[1]"}
+Simmilar to Create Person, but the casting, director, and producer correspond to the person id in the firebase.
 
+### Search
+this method explore the database for people or movies, if the id parameter is included in the GET method. Only retrieves the registry that corresponds to the id, if no id is passed the endpoint retrieves all elements in the collection.
 
+header route:
 @app.route('/search', methods=['GET'])
+@app.route('/search?id=<query id>', methods=['GET'])
 
+### Roman
+This endpoint returns a roman number string from an integer.
+@app.route('/roman?body=<number>', methods=['GET'])
 
-@app.route('/roman', methods=['GET'])
+### Delete (Authentication Required)
+This method removes an existing id
+@app.route('/delete?id=<id to remove>', methods=['GET', 'DELETE', 'POST'])
 
-
-@app.route('/delete', methods=['GET', 'DELETE', 'POST'])
+This method require an Authentication header that include the token retrieved from the login endpoint.

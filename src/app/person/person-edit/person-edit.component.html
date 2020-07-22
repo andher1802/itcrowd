@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+      <a class="navbar-brand" routerLink="/person/explore">Explore</a>
+      <a class="navbar-brand" routerLink="/person/create">Create</a>
+      <a class="navbar-brand" routerLink="/person/delete">Delete</a>
+  </div>
+</nav>
+<div class="container login-container">
+  <div class="row">
+      <div class="col-md-6 login-form-1">
+          <h3>Create/Edit actor</h3>
+          <form (ngSubmit)=onSubmit(f) #f="ngForm">
+            <div class="form-group">
+              <label>ID </label>
+              <select class="form-control" [(ngModel)]="selected4" name="idmovie">
+                <option [value]="movie.id" *ngFor="let movie of optionspeople">{{movie.firstName}} {{movie.lastName}}</option>
+                <option value="new"> new </option>
+              </select>
+            </div>
+              <div class="form-group">
+                  <input
+                  type="text"
+                  class="form-control"
+                  placeholder="First Name *"
+                  value=""
+                  ngModel
+                  name = "firstName">
+              </div>
+              <div class="form-group">
+                  <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Last Name *"
+                  value=""
+                  ngModel
+                  name = "lastName">
+              </div>
+              <div class="form-group">
+                <label>Casting (s)</label>
+                <select class="form-control" [(ngModel)]="selected" name="testc" multiple>
+                  <option [value]="people.id" *ngFor="let people of optionsmovies">{{people.title}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Director (s)</label>
+                <select class="form-control" [(ngModel)]="selected2" name="testd" multiple>
+                  <option [value]="people.id" *ngFor="let people of optionsmovies">{{people.title}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Producer (s)</label>
+                <select class="form-control" [(ngModel)]="selected3" name="testp" multiple>
+                  <option [value]="people.id" *ngFor="let people of optionsmovies">{{people.title}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <button type="submit">Save</button>
+              </div>
+          </form>
+      </div>
+</div>

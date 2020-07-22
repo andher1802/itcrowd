@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+      <a class="navbar-brand" routerLink="/movies/explore">Explore</a>
+      <a class="navbar-brand" routerLink="/movies/create">Create</a>
+      <a class="navbar-brand" routerLink="/movies/delete">Delete</a>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#" class="list-group-item clearfix" *ngFor="let movie of movielist">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{movie.title}}</h4>
+        <h5 class="list-group-item-heading">{{movie.releaseYear}}</h5>
+        <h6>Casting</h6>
+          <p class="list-group-item-text" *ngFor="let moviec of movie.casting">{{moviec[0]}}, {{moviec[1]}}</p>
+        <br>
+        <h6>Directors</h6>
+        <p class="list-group-item-text" *ngFor="let movied of movie.directors">{{movied[0]}}, {{movied[1]}}</p>
+        <br>
+        <h6>Producers</h6>
+        <p class="list-group-item-text" *ngFor="let moviep of movie.producers">{{moviep[0]}}, {{moviep[1]}}</p>
+      </div>
+    </a>
+  </div>
+</div>
